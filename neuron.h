@@ -12,6 +12,7 @@ class Neuron {
 	double V_;
 	int nb_spikes_;
 	vector<int> spike_times_;
+	int time_;
 	
 	public:
 	
@@ -19,9 +20,12 @@ class Neuron {
 	double getV const();
 	int getNb_spikes const();
 	vector<int> getSpike_times const();
+	int getTime const();
 	void setV(double);
 	void setNb_spikes(int);
+	void setTime (int);
 	
+	//update method
 	void update ();
 	
 	

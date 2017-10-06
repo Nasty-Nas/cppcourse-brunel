@@ -15,4 +15,15 @@ vector<int> Neuron::getSpike_times const() {
 	return spike_times_;
 }
 
-void Neuron::update() 
+int Neuron::getTime const() {
+	return time_;
+}
+
+void Neuron::setTime(int t) {
+	time_ = t;
+}
+
+//update method
+void Neuron::update() {
+
+}
