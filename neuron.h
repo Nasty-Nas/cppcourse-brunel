@@ -12,9 +12,19 @@ class Neuron {
 	double V_;
 	int nb_spikes_;
 	vector<int> spike_times_;
+<<<<<<< HEAD
 	int time_;
+=======
+	double ref_;
+	double threshold_ = 20;
+	int time_;
+	double tau_ = 0.002;
+>>>>>>> dcba6491ebbbc270fa901ca9e3529b6bd41cd6e5
 	
 	public:
+	
+	//Constructor
+	Neuron(int t);
 	
 	//getters and setters
 	double getV const();
