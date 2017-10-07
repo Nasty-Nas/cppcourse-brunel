@@ -1,28 +1,28 @@
 #include <iostream>
-#include <cmaths>
+#include <cmath>
 #include "neuron.h"
 
 using namespace std;
 
 //Constructor
-Neruon::Neruon(int t)
+Neuron::Neuron(int t)
 	:threshold_(20), tau_(0.002), time_(t)
 {}
 
 //Setters and Getters
-double Neuron::getV const() {
+double Neuron::getV() {
 	return V_;
 }
 
-int Neuron::getNb_spikes const() {
+int Neuron::getNb_spikes() {
 	return nb_spikes_;
 }
 
-vector<int> Neuron::getSpike_times const() {
+vector<int> Neuron::getSpike_times() {
 	return spike_times_;
 }
 
-int Neuron::getTime const() {
+int Neuron::getTime() {
 	return time_;
 }
 
@@ -39,12 +39,12 @@ void Neuron::update(double I) {
 			
 	} else {
 			
-		V_ = ((eps(-h/tau_)*V_) + (I*R*(1-eps(-h/tau_))))
+		V_ = ((exp(-h/tau_)*V_) + (I*R*(1-exp(-h/tau_))));
 	}
 		
 	if (V_ >= threshold_) {
 		
-		spike_times_.pushback(time_);
+		spike_times_.push_back(time_);
 		ref = tau_/h;
 		nb_spikes_ +=1;	
 	}
