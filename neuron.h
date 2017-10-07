@@ -1,27 +1,21 @@
-#ifndef NEURON_
-#define NEURON_
+#ifndef NEURON_H
+#define NEURON_H
 
 #include <iostream>
 #include <vector>
 
-
 class Neuron {
 	
-	private:
-	
-	double V_;
+private:
+	double V_; //membrane potential (mV)
 	int nb_spikes_;
 	vector<int> spike_times_;
-<<<<<<< HEAD
+	double threshold_; //potential for which the neuron spikes (mV)
+	double tau_; //period where neuron is refractory (seconds)
 	int time_;
-=======
 	double ref_;
-	double threshold_ = 20;
-	int time_;
-	double tau_ = 0.002;
->>>>>>> dcba6491ebbbc270fa901ca9e3529b6bd41cd6e5
-	
-	public:
+
+public:
 	
 	//Constructor
 	Neuron(int t);
@@ -36,15 +30,10 @@ class Neuron {
 	void setTime (int);
 	
 	//update method
-	void update ();
-	
-	
-	
-	
-	
-	
-	
+	void update(double);	
 
 
 
 };
+
+#endif
