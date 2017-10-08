@@ -2,7 +2,6 @@
 #include <cmath>
 #include "neuron.h"
 
-
 //Constructor
 Neuron::Neuron(double t)
 	:threshold_(20), tau_(0.002), time_(t), is_refractory_(false), V_(-70), ref_period_(0)

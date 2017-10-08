@@ -13,8 +13,8 @@ private :
 	double threshold_; //potential for which the neuron spikes (mV)
 	double tau_; //period where neuron is refractory (seconds)
 	double time_;
-	bool is_refractory_;
-	double ref_period_;
+	bool is_refractory_; //ture = neuron is in refractory period
+	double ref_period_; //value going form [0 to tau_], when == to tau_ -> end of refractory period
 
 public :
 	
