@@ -2,10 +2,9 @@
 #include <cmath>
 #include "neuron.h"
 
-using namespace std;
 
 //Constructor
-Neuron::Neuron(int t)
+Neuron::Neuron(double t)
 	:threshold_(20), tau_(0.002), time_(t), is_refractory_(false), V_(-70), ref_period_(0)
 {}
 
@@ -18,15 +17,15 @@ int Neuron::getNb_spikes() {
 	return nb_spikes_;
 }
 
-vector<int> Neuron::getSpike_times() {
+std::vector<double> Neuron::getSpike_times() {
 	return spike_times_;
 }
 
-int Neuron::getTime() {
+double Neuron::getTime() {
 	return time_;
 }
 
-void Neuron::setTime(int t) {
+void Neuron::setTime(double t) {
 	time_ = t;
 }
 
@@ -50,7 +49,7 @@ void Neuron::update(double I) {
 		is_refractory_ = true;
 	} else {
 		double R = tau_;
-		V_ = ((exp(-h/tau_)*V_) + (I*R*(1-exp(-h/tau_))));
+		V_ = (((exp(-h/tau_))*V_) + (I*R*(1-(exp(-h/tau_)))));
 	}
 	time_ += h;	
 }

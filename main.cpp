@@ -1,14 +1,15 @@
 #include <iostream>
 #include <fstream>
 #include "neuron.h"
+#include "neuron.cpp" //why works with this? (not supposed to inculde source file)
 
 using namespace std;
 
 int main()
 {
 	double Iext;
-	int t_start;
-	int t_end;
+	double t_start;
+	double t_end;
 
 	cout << "Enter external current : ";
 	cin >> Iext;
