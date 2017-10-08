@@ -13,7 +13,8 @@ private :
 	double threshold_; //potential for which the neuron spikes (mV)
 	double tau_; //period where neuron is refractory (seconds)
 	int time_;
-	double ref_;
+	bool is_refractory_;
+	double ref_period_;
 
 public :
 	
