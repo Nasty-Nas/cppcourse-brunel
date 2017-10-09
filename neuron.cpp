@@ -4,7 +4,7 @@
 
 //Constructor
 Neuron::Neuron(double t)
-	:threshold_(20), tau_(0.002), time_(t), is_refractory_(false), V_(-70), ref_period_(0)
+	:time_(t), is_refractory_(false), V_(-70), ref_period_(0), nb_spikes_(0)
 {}
 
 //Setters and Getters
@@ -30,11 +30,10 @@ void Neuron::setTime(double t) {
 
 //update method
 void Neuron::update(double I) {
-	double h = 0.001;
 	if (is_refractory_ == true) {
 		V_ = 0;
-		ref_period_ += h;
-		if (ref_period_ == tau_)
+		ref_period_ += h_;
+		if (ref_period_ >= t_ref_)
 		{
 			is_refractory_ = false;
 			ref_period_ = 0;
@@ -47,8 +46,7 @@ void Neuron::update(double I) {
 		V_ = 0;
 		is_refractory_ = true;
 	} else {
-		double R = tau_;
-		V_ = (((exp(-h/tau_))*V_) + (I*R*(1-(exp(-h/tau_)))));
+		V_ = (((exp(-h_/tau_))*V_) + (I*R_*(1-(exp(-h_/tau_)))));
 	}
-	time_ += h;	
+	time_ += h_;	
 }
