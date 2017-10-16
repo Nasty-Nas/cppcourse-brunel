@@ -15,8 +15,8 @@ private :
 	const double R_ = (200);
 	const int h_ = (1); //0.1 ms
 	const double t_ref_ = (20); //period where neuron is refractory in time steps(20*h_) =2ms
-	double time_;
-	bool is_refractory_; //true = neuron is in refractory period
+	double clock_;
+	bool isRefractory_; //true = neuron is in refractory period
 	double ref_period_; //value going form [0 to t_ref_], when == to t_ref_ -> end of refractory period
 
 public :
@@ -34,7 +34,7 @@ public :
 	void setTime (double);
 	
 	//update method
-	void update(double);
+	bool update(double);
 };
 
 #endif

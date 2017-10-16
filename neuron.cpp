@@ -4,7 +4,7 @@
 
 //Constructor
 Neuron::Neuron(double t)
-	:time_(t), is_refractory_(false), V_(-70), ref_period_(0), nb_spikes_(0)
+	:clock_(t), isRefractory_(false), V_(-70), ref_period_(0), nb_spikes_(0)
 {}
 
 //Setters and Getters
@@ -21,32 +21,35 @@ std::vector<double> Neuron::getSpike_times() {
 }
 
 double Neuron::getTime() {
-	return time_;
+	return clock_;
 }
 
 void Neuron::setTime(double t) {
-	time_ = t;
+	clock_ = t;
 }
 
 //update method
-void Neuron::update(double I) {
-	if (is_refractory_ == true) {
+bool Neuron::update(double I) {
+	bool spiked = false;
+	if (isRefractory_ == true) {
 		V_ = 0;
 		ref_period_ += h_;
 		if (ref_period_ >= t_ref_)
 		{
-			is_refractory_ = false;
+			isRefractory_ = false;
 			ref_period_ = 0;
 			V_ = 10;
 		}
 		
 	} else if (V_ >= threshold_) {
-		spike_times_.push_back(time_);
+		spike_times_.push_back(clock_);
 		nb_spikes_ +=1;
+		spiked = true;
 		V_ = 0;
-		is_refractory_ = true;
+		isRefractory_ = true;
 	} else {
 		V_ = (((exp(-h_/tau_))*V_) + (I*R_*(1-(exp(-h_/tau_)))));
 	}
-	time_ += h_;	
+	clock_ ++;
+	return spiked;
 }

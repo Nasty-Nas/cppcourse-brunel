@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include "neuron.h"
-#include "neuron.cpp" //why works with this? (not supposed to inculde source file)
+#include "neuron.cpp" //Cmake
 
 using namespace std;
 
