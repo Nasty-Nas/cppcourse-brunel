@@ -6,17 +6,17 @@
 //Constructor
 Neuron::Neuron()
 	:
+	potential_(0.0),
+	nb_spikes_(0),
 	clock_(0),
 	isRefractory_(false),
-	potential_(0.0),
 	ref_period_(0),
-	nb_spikes_(0),
-	i_ext_(0.0),
-	spike_buff_()
+	spike_buff_(),
+	i_ext_(0.0)
 {
 	spike_buff_.resize(transmission_delay_ +1, 0.0);
 	assert(spike_buff_.size()==transmission_delay_+1);
-	c1_ = std::exp(-step_duration_/tau_);
+	c1_ = exp(-step_duration_/tau_);
 	c2_ = R_ * (1 - c1_);
 
 }

@@ -1,0 +1,2 @@
+/home/INTRANET/seddiki/myfiles/BA3/Project/Neuron/googletest/build/CMakeFiles/gtest.dir
+/home/INTRANET/seddiki/myfiles/BA3/Project/Neuron/googletest/build/CMakeFiles/gtest_main.dir

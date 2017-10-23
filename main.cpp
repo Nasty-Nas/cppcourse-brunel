@@ -1,9 +1,9 @@
 #include <iostream>
 #include <fstream>
 #include "Neuron.h"
-#include "Neuron.cpp" //Cmake
+//#include "Neuron.cpp" //Cmake
 #include "Network.h"
-#include "Network.cpp"
+//#include "Network.cpp"
 
 using namespace std;
 
