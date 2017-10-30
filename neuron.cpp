@@ -4,7 +4,7 @@
 #include "Neuron.h"
 
 //Constructor
-Neuron::Neuron()
+Neuron::Neuron(bool type)
 	:
 	potential_(0.0),
 	nb_spikes_(0),
@@ -13,11 +13,12 @@ Neuron::Neuron()
 	ref_period_(0),
 	spike_buff_(),
 	i_ext_(0.0)
+	isExcitatory(type);
 {
 	spike_buff_.resize(transmission_delay_ +1, 0.0);
 	assert(spike_buff_.size()==transmission_delay_+1);
 	c1_ = exp(-step_duration_/tau_);
-	c2_ = R_ * (1 - c1_);
+	c2_ = R_ * (1.0 - c1_);
 
 }
 
@@ -38,12 +39,37 @@ int Neuron::getTime() const {
 	return clock_;
 }
 
+/**
+ * get if neuron is exitatory or inhibitory
+ * @return true = exitatory, false =inhibitory
+ */
+bool Neuron::isExcitatory() const {
+	return isExcitatory_;
+}
+
 void Neuron::setTime(int t) {
 	clock_ = t;
 }
 
 void Neuron::set_i_ext(double i) {
 	i_ext_ = i;
+}
+
+std::vector<int> Neuron::getTarget_co() const {
+	return target_co_;
+}
+
+void Neuron::setTarget_co(int i) {
+	target_co_.push_back(i);
+}
+
+double Neuron::getJ() const {
+	if (isExcitatory)
+	{
+		return J_excitatory_;
+	}else{
+		return J_inhibitory_;
+	}
 }
 
 /**
@@ -77,6 +103,7 @@ bool Neuron::update() {
 	} else {
 		potential_ = ((c1_*potential_) + (i_ext_*c2_));
 		potential_ += spike_buff_[clock_ % spike_buff_.size()];
+		potential_ += Network::get_background_noise();
 	}
 	//reset buffer potential for this time step (after it was added to the neuron's potential)
 	spike_buff_[clock_ % spike_buff_.size()] = 0.0;
