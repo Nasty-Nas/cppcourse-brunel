@@ -1,9 +1,13 @@
 #include <cassert>
 #include <iostream>
 #include <cmath>
-#include "Neuron.h"
+#include <random>
+#include <algorithm>
 
-//Constructor
+#include "Neuron.h"
+#include "Network.h"
+
+
 Neuron::Neuron(bool type)
 	:
 	potential_(0.0),
@@ -12,17 +16,16 @@ Neuron::Neuron(bool type)
 	isRefractory_(false),
 	ref_period_(0),
 	spike_buff_(),
-	i_ext_(0.0)
-	isExcitatory(type);
+	i_ext_(0.0),
+	isExcitatory_(type)
 {
 	spike_buff_.resize(transmission_delay_ +1, 0.0);
-	assert(spike_buff_.size()==transmission_delay_+1);
+	assert(spike_buff_.size()== (size_t) transmission_delay_+1);
 	c1_ = exp(-step_duration_/tau_);
 	c2_ = R_ * (1.0 - c1_);
 
 }
 
-//Setters and Getters
 double Neuron::getPotential() const {
 	return potential_;
 }
@@ -39,17 +42,10 @@ int Neuron::getTime() const {
 	return clock_;
 }
 
-/**
- * get if neuron is exitatory or inhibitory
- * @return true = exitatory, false =inhibitory
- */
 bool Neuron::isExcitatory() const {
 	return isExcitatory_;
 }
 
-void Neuron::setTime(int t) {
-	clock_ = t;
-}
 
 void Neuron::set_i_ext(double i) {
 	i_ext_ = i;
@@ -64,7 +60,7 @@ void Neuron::setTarget_co(int i) {
 }
 
 double Neuron::getJ() const {
-	if (isExcitatory)
+	if (isExcitatory_)
 	{
 		return J_excitatory_;
 	}else{
@@ -72,25 +68,24 @@ double Neuron::getJ() const {
 	}
 }
 
-/**
- * stores incoming spikes in buffer
- * @param j [weight of post synaptic potential]
- * @param arrival [time at which the spike arrives]
- */
 void Neuron::recieve_spike(double j, int arrival) {
 	spike_buff_[arrival % spike_buff_.size()] += j;
 }
 
-/**
- * Updates a neuron's membrane potential for each time step and checks for spike condition
- * @return bool (true if the neuron spiked at this time step)
- */
+double Neuron::get_background_noise() {
+	std::random_device rd;
+	std::mt19937 gen(rd());
+
+	std::poisson_distribution<> poisson(2);
+	return poisson(gen);
+}
+
 bool Neuron::update() {
 	bool spiked = false;
 	if (isRefractory_) {
 		potential_ = 0.0;
 		ref_period_ ++;
-		if (ref_period_ >= t_ref_)
+		if (ref_period_ >= (t_ref_ - 1))
 		{
 			isRefractory_ = false;
 			ref_period_ = 0;
@@ -100,10 +95,38 @@ bool Neuron::update() {
 		nb_spikes_ ++;
 		spiked = true;
 		isRefractory_ = true;
+		potential_ = 0.0;
 	} else {
 		potential_ = ((c1_*potential_) + (i_ext_*c2_));
 		potential_ += spike_buff_[clock_ % spike_buff_.size()];
-		potential_ += Network::get_background_noise();
+		potential_ += get_background_noise();
+	}
+	//reset buffer potential for this time step (after it was added to the neuron's potential)
+	spike_buff_[clock_ % spike_buff_.size()] = 0.0;
+	clock_ ++;
+	return spiked;
+}
+
+bool Neuron::update_no_noise() {
+	bool spiked = false;
+	if (isRefractory_) {
+		potential_ = 0.0;
+		ref_period_ ++;
+		if (ref_period_ >= (t_ref_ - 1))
+		{
+			isRefractory_ = false;
+			ref_period_ = 0;
+		}	
+	} else if (potential_ >= threshold_) {
+		spike_times_.push_back(clock_);
+		nb_spikes_ ++;
+		spiked = true;
+		isRefractory_ = true;
+		potential_ = 0.0;
+	} else {
+		potential_ = ((c1_*potential_) + (i_ext_*c2_));
+		potential_ += spike_buff_[clock_ % spike_buff_.size()];
+		//potential_ += get_background_noise();
 	}
 	//reset buffer potential for this time step (after it was added to the neuron's potential)
 	spike_buff_[clock_ % spike_buff_.size()] = 0.0;

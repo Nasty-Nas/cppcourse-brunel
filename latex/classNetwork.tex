@@ -1,0 +1,151 @@
+\hypertarget{classNetwork}{\section{Network Class Reference}
+\label{classNetwork}\index{Network@{Network}}
+}
+
+
+Represents a network of neurons in the brain.  
+
+
+
+
+{\ttfamily \#include $<$Network.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classNetwork_a3cc2fb4f8fa4d507077e8da85ce5a1c8}{\hyperlink{classNetwork_a3cc2fb4f8fa4d507077e8da85ce5a1c8}{Network} ()}\label{classNetwork_a3cc2fb4f8fa4d507077e8da85ce5a1c8}
+
+\begin{DoxyCompactList}\small\item\em \hyperlink{classNetwork}{Network} constructor that generates the neurons and connects them randomly together. \end{DoxyCompactList}\item 
+\hypertarget{classNetwork_a7a4e19cdb4bf0c7ecf82baa643831492}{virtual \hyperlink{classNetwork_a7a4e19cdb4bf0c7ecf82baa643831492}{$\sim$\-Network} ()}\label{classNetwork_a7a4e19cdb4bf0c7ecf82baa643831492}
+
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \hyperlink{classNetwork_ad0efa7f34a8da1a772495ef9049d8eef}{set\-\_\-current} (int n, double i)
+\begin{DoxyCompactList}\small\item\em Sets external current i for neuron n. \end{DoxyCompactList}\item 
+double \hyperlink{classNetwork_ade8ce5516ec390a0068ba6bb6e3b944d}{get\-\_\-potential} (int n)
+\begin{DoxyCompactList}\small\item\em Get the membrane potential of a given neuron in out network. \end{DoxyCompactList}\item 
+void \hyperlink{classNetwork_afc6426636611ba2694b6d7c631d02f41}{create\-\_\-connexions} (int n)
+\begin{DoxyCompactList}\small\item\em Randomly chooses 1000 excitatory and 250 inhibitory neurons in our network and connects them to a given target neuron. \end{DoxyCompactList}\item 
+void \hyperlink{classNetwork_a402228b86fbabdb3394ab21c9c8d4b30}{update} (int t)
+\begin{DoxyCompactList}\small\item\em Updates all the neurons in our network over a given number of time steps If a neuron in our network spikes, its spike time is recorded in an external file\-: \char`\"{}spikes.\-gdf\char`\"{} found in the build directory. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classNetwork_a25f7fbea76b8115bed5e2bb737ed2b35}{const int \hyperlink{classNetwork_a25f7fbea76b8115bed5e2bb737ed2b35}{n\-\_\-excitatory\-\_\-} = 10000}\label{classNetwork_a25f7fbea76b8115bed5e2bb737ed2b35}
+
+\begin{DoxyCompactList}\small\item\em number of excitatory neurons in the network \end{DoxyCompactList}\item 
+\hypertarget{classNetwork_a895e24952ca3c5772a678af298dd15f0}{const int \hyperlink{classNetwork_a895e24952ca3c5772a678af298dd15f0}{n\-\_\-inhibitory\-\_\-} = 2500}\label{classNetwork_a895e24952ca3c5772a678af298dd15f0}
+
+\begin{DoxyCompactList}\small\item\em number of inhibitory neurons in the network \end{DoxyCompactList}\item 
+\hypertarget{classNetwork_abac57666745803e5e0fa37f41af53561}{const int \hyperlink{classNetwork_abac57666745803e5e0fa37f41af53561}{c\-\_\-excitatory\-\_\-} = 1000}\label{classNetwork_abac57666745803e5e0fa37f41af53561}
+
+\begin{DoxyCompactList}\small\item\em number of incoming excitatory connections to a neuron \end{DoxyCompactList}\item 
+\hypertarget{classNetwork_a417303b8fe7428ebe294fbac5695217a}{const int \hyperlink{classNetwork_a417303b8fe7428ebe294fbac5695217a}{c\-\_\-inhibitory\-\_\-} = 250}\label{classNetwork_a417303b8fe7428ebe294fbac5695217a}
+
+\begin{DoxyCompactList}\small\item\em number of incoming inhibitory connections to a neuron \end{DoxyCompactList}\item 
+\hypertarget{classNetwork_afccfb0a1a9efd8479e5d1a87c1cc7f1a}{const int \hyperlink{classNetwork_afccfb0a1a9efd8479e5d1a87c1cc7f1a}{c\-\_\-total\-\_\-} = 1250}\label{classNetwork_afccfb0a1a9efd8479e5d1a87c1cc7f1a}
+
+\begin{DoxyCompactList}\small\item\em number of total incoming connections to a neuron \end{DoxyCompactList}\item 
+\hypertarget{classNetwork_a054ac558c5f02fe3c1ed1ffbfa911d76}{const int \hyperlink{classNetwork_a054ac558c5f02fe3c1ed1ffbfa911d76}{transmission\-\_\-delay\-\_\-} = 15}\label{classNetwork_a054ac558c5f02fe3c1ed1ffbfa911d76}
+
+\begin{DoxyCompactList}\small\item\em delay after which spike is transmitted (in steps) \end{DoxyCompactList}\item 
+\hypertarget{classNetwork_a3446a7d3d832830dc206d5c9e41a58d8}{std\-::vector$<$ \hyperlink{classNeuron}{Neuron} $>$ \hyperlink{classNetwork_a3446a7d3d832830dc206d5c9e41a58d8}{neurons\-\_\-}}\label{classNetwork_a3446a7d3d832830dc206d5c9e41a58d8}
+
+\begin{DoxyCompactList}\small\item\em all neurons in the network \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classNetwork_a6f679700d24599aeaeabb7b1415e8625}{static const int \hyperlink{classNetwork_a6f679700d24599aeaeabb7b1415e8625}{n\-\_\-total\-\_\-} = 12500}\label{classNetwork_a6f679700d24599aeaeabb7b1415e8625}
+
+\begin{DoxyCompactList}\small\item\em total number of neurons in the network \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Represents a network of neurons in the brain. 
+
+The network contains 12500 neurons \-: 10000 of them are excitatory, 2500 are inhibitory. These neurons are randomly connected and send signals to each other
+
+\begin{DoxyAuthor}{Author}
+Seddiki Anas 
+\end{DoxyAuthor}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classNetwork_afc6426636611ba2694b6d7c631d02f41}{\index{Network@{Network}!create\-\_\-connexions@{create\-\_\-connexions}}
+\index{create\-\_\-connexions@{create\-\_\-connexions}!Network@{Network}}
+\subsubsection[{create\-\_\-connexions}]{\setlength{\rightskip}{0pt plus 5cm}void Network\-::create\-\_\-connexions (
+\begin{DoxyParamCaption}
+\item[{int}]{n}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classNetwork_afc6426636611ba2694b6d7c631d02f41}
+
+
+Randomly chooses 1000 excitatory and 250 inhibitory neurons in our network and connects them to a given target neuron. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & target neuron we want to generate connexions for \\
+\hline
+\end{DoxyParams}
+\hypertarget{classNetwork_ade8ce5516ec390a0068ba6bb6e3b944d}{\index{Network@{Network}!get\-\_\-potential@{get\-\_\-potential}}
+\index{get\-\_\-potential@{get\-\_\-potential}!Network@{Network}}
+\subsubsection[{get\-\_\-potential}]{\setlength{\rightskip}{0pt plus 5cm}double Network\-::get\-\_\-potential (
+\begin{DoxyParamCaption}
+\item[{int}]{n}
+\end{DoxyParamCaption}
+)}}\label{classNetwork_ade8ce5516ec390a0068ba6bb6e3b944d}
+
+
+Get the membrane potential of a given neuron in out network. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & index of the neuron of interest (in neurons\-\_\-) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the membrane potential of the neuron of interest 
+\end{DoxyReturn}
+\hypertarget{classNetwork_ad0efa7f34a8da1a772495ef9049d8eef}{\index{Network@{Network}!set\-\_\-current@{set\-\_\-current}}
+\index{set\-\_\-current@{set\-\_\-current}!Network@{Network}}
+\subsubsection[{set\-\_\-current}]{\setlength{\rightskip}{0pt plus 5cm}void Network\-::set\-\_\-current (
+\begin{DoxyParamCaption}
+\item[{int}]{n, }
+\item[{double}]{i}
+\end{DoxyParamCaption}
+)}}\label{classNetwork_ad0efa7f34a8da1a772495ef9049d8eef}
+
+
+Sets external current i for neuron n. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & neuron number \\
+\hline
+{\em i} & external current \\
+\hline
+\end{DoxyParams}
+\hypertarget{classNetwork_a402228b86fbabdb3394ab21c9c8d4b30}{\index{Network@{Network}!update@{update}}
+\index{update@{update}!Network@{Network}}
+\subsubsection[{update}]{\setlength{\rightskip}{0pt plus 5cm}void Network\-::update (
+\begin{DoxyParamCaption}
+\item[{int}]{t}
+\end{DoxyParamCaption}
+)}}\label{classNetwork_a402228b86fbabdb3394ab21c9c8d4b30}
+
+
+Updates all the neurons in our network over a given number of time steps If a neuron in our network spikes, its spike time is recorded in an external file\-: \char`\"{}spikes.\-gdf\char`\"{} found in the build directory. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & number of time steps we update our network over \\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{classNeuron_ade349102c17d508352a1061798083ba2}{Neuron\-::update()} 
+\end{DoxySeeAlso}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+Network.\-h\item 
+Network.\-cpp\end{DoxyCompactItemize}
